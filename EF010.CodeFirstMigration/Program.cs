@@ -7,6 +7,11 @@ namespace EF010.CodeFirstMigration
     {
         public static void Main(string[] args)
         {
+            using(var _db = new AppDbContext())
+            {
+                
+
+            }
     
             Console.ReadKey();
         }
