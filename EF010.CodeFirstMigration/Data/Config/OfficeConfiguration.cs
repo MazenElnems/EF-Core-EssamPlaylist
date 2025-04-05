@@ -8,22 +8,30 @@ namespace EF010.CodeFirstMigration.Data.Config
     {
         public void Configure(EntityTypeBuilder<Office> builder)
         {
-            builder.HasKey(x => x.Id);
-            builder.Property(x => x.Id).ValueGeneratedNever();
+            builder
+                .HasKey(x => x.Id);
 
-            builder.Property(x => x.OfficeName)
+            builder
+                .Property(x => x.Id)
+                .ValueGeneratedNever(); // to prevent Identity insert
+
+            builder
+                .Property(x => x.OfficeName)
                 .HasColumnType("VARCHAR")
                 .HasMaxLength(50).IsRequired();
 
-            builder.Property(x => x.OfficeLocation)
-             .HasColumnType("VARCHAR")
-             .HasMaxLength(50).IsRequired();
+            builder
+                .Property(x => x.OfficeLocation)
+                .HasColumnType("VARCHAR")
+                .HasMaxLength(50).IsRequired();
 
 
-            builder.ToTable("Offices");
+            builder
+                .ToTable("Offices");
 
 
-            builder.HasData(LoadOffices());
+            builder
+                .HasData(LoadOffices());
         }
 
         private static List<Office> LoadOffices()

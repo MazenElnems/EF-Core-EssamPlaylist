@@ -8,14 +8,14 @@ namespace EF010.CodeFirstMigration.Data.Config
     {
         public void Configure(EntityTypeBuilder<Enrollment> builder)
         {
-            builder.HasKey(x => new { x.SectionId, x.StudentId });
+            builder
+                .HasKey(x => new { x.SectionId, x.StudentId });
 
+            builder
+                .ToTable("Enrollments");
 
-
-            builder.ToTable("Enrollments");
-
-
-            builder.HasData(LoadEnrollments());
+            builder
+                .HasData(LoadEnrollments());
         }
 
         private static List<Enrollment> LoadEnrollments()

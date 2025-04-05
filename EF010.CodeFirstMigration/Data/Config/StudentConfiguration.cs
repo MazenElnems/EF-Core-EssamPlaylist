@@ -8,21 +8,30 @@ namespace EF010.CodeFirstMigration.Data.Config
     {
         public void Configure(EntityTypeBuilder<Student> builder)
         {
-            builder.HasKey(x => x.Id);
-            builder.Property(x => x.Id).ValueGeneratedNever();
+            builder
+                .HasKey(x => x.Id);
+            builder
+                .Property(x => x.Id)
+                .ValueGeneratedNever();
 
-            builder.Property(x => x.FName)
+            builder
+                .Property(x => x.FName)
                 .HasColumnType("VARCHAR")
-                .HasMaxLength(50).IsRequired();
+                .HasMaxLength(50)
+                .IsRequired();
 
-            builder.Property(x => x.LName)
-            .HasColumnType("VARCHAR")
-            .HasMaxLength(50).IsRequired();
+            builder
+                .Property(x => x.LName)
+                .HasColumnType("VARCHAR")
+                .HasMaxLength(50)
+                .IsRequired();
 
 
-            builder.ToTable("Students");
+            builder
+                .ToTable("Students");
 
-            builder.HasData(LoadStudents());
+            builder
+                .HasData(LoadStudents());
         }
 
         private static List<Student> LoadStudents()

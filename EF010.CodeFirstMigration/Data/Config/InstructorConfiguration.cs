@@ -8,25 +8,36 @@ namespace EF010.CodeFirstMigration.Data.Config
     {
         public void Configure(EntityTypeBuilder<Instructor> builder)
         {
-            builder.HasKey(x => x.Id);
-            builder.Property(x => x.Id).ValueGeneratedNever();
+            builder
+                .HasKey(x => x.Id);
 
-            builder.Property(x => x.FName)
+            builder
+                .Property(x => x.Id)
+                .ValueGeneratedNever();     // to prevent Identity insert
+
+            builder
+                .Property(x => x.FName)
                 .HasColumnType("VARCHAR")
-                .HasMaxLength(50).IsRequired();
+                .HasMaxLength(50)
+                .IsRequired();
 
-            builder.Property(x => x.LName)
-            .HasColumnType("VARCHAR")
-            .HasMaxLength(50).IsRequired();
+            builder
+                .Property(x => x.LName)
+                .HasColumnType("VARCHAR")
+                .HasMaxLength(50)
+                .IsRequired();
 
-            builder.HasOne(x => x.Office)
-                    .WithOne(x => x.Instructor)
-                    .HasForeignKey<Instructor>(x => x.OfficeId)
-                    .IsRequired(false);
+            builder
+                .HasOne(x => x.Office)
+                .WithOne(x => x.Instructor)
+                .HasForeignKey<Instructor>(x => x.OfficeId)
+                .IsRequired(false);
 
-            builder.ToTable("Instructors");
+            builder
+                .ToTable("Instructors");
 
-            builder.HasData(LoadInstructors());
+            builder
+                .HasData(LoadInstructors());
         }
 
         private static List<Instructor> LoadInstructors()

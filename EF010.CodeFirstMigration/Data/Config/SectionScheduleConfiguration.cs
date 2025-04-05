@@ -8,17 +8,22 @@ namespace EF010.CodeFirstMigration.Data.Config
     {
         public void Configure(EntityTypeBuilder<SectionSchedule> builder)
         {
-            builder.HasKey(x => x.Id);
+            builder
+                .HasKey(x => x.Id);
 
-            builder.Property(x => x.StartTime)
+            builder
+                .Property(x => x.StartTime)
                 .HasColumnType("time");
 
-            builder.Property(x => x.EndTime)
+            builder
+                .Property(x => x.EndTime)
                 .HasColumnType("time");
 
-            builder.ToTable("SectionSchedules");
+            builder
+                .ToTable("SectionSchedules");
 
-            builder.HasData(LoadSectionSchedules());
+            builder
+                .HasData(LoadSectionSchedules());
         }
 
         private static List<SectionSchedule> LoadSectionSchedules()

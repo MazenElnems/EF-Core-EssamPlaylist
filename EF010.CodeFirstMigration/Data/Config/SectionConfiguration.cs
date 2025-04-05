@@ -8,37 +8,48 @@ namespace EF010.CodeFirstMigration.Data.Config
     {
         public void Configure(EntityTypeBuilder<Section> builder)
         {
-            builder.HasKey(x => x.Id);
-            builder.Property(x => x.Id).ValueGeneratedNever();
+            builder
+                .HasKey(x => x.Id);
 
-            // builder.Property(x => x.CourseName).HasMaxLength(255); // nvarchar(255)
+            builder
+                .Property(x => x.Id)
+                .ValueGeneratedNever(); // to prevent auto incrementing Id
 
-            builder.Property(x => x.SectionName)
+            
+            builder
+                .Property(x => x.SectionName)
                 .HasColumnType("VARCHAR")
-                .HasMaxLength(255).IsRequired();
+                .HasMaxLength(255)
+                .IsRequired();
 
-            builder.HasOne(x => x.Course)
+            builder
+                .HasOne(x => x.Course)
                 .WithMany(x => x.Sections)
                 .HasForeignKey(x => x.CourseId)
                 .IsRequired();
 
-            builder.HasOne(x => x.Instructor)
+            builder
+                .HasOne(x => x.Instructor)
                 .WithMany(x => x.Sections)
                 .HasForeignKey(x => x.InstructorId)
                 .IsRequired(false);
 
 
-            builder.HasMany(c => c.Schedules)
+            builder
+                .HasMany(c => c.Schedules)
                 .WithMany(x => x.Sections)
                 .UsingEntity<SectionSchedule>();
 
-            builder.HasMany(c => c.Students)
-          .WithMany(x => x.Sections)
-          .UsingEntity<Enrollment>();
+            builder
+                .HasMany(c => c.Students)
+                .WithMany(x => x.Sections)
+                .UsingEntity<Enrollment>();
 
-            builder.ToTable("Sections");
+            builder
+                .ToTable("Sections");
 
-            builder.HasData(LoadSections());
+            builder
+                .HasData(LoadSections());
         }
 
         private static List<Section> LoadSections()
