@@ -1,6 +1,7 @@
 ﻿using EF010.CodeFirstMigration.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Logging;
 
 namespace EF010.CodeFirstMigration.Data
 {
@@ -23,6 +24,9 @@ namespace EF010.CodeFirstMigration.Data
             var connectionString = config.GetSection("constr").Value;
 
             optionsBuilder.UseSqlServer(connectionString);
+
+            optionsBuilder.LogTo(Console.WriteLine, LogLevel.Information);
+            optionsBuilder.EnableSensitiveDataLogging();
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

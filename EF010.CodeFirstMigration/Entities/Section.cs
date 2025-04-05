@@ -1,4 +1,6 @@
-﻿namespace EF010.CodeFirstMigration.Entities
+﻿using EF010.CodeFirstMigration.Entities.OwnedEntities;
+
+namespace EF010.CodeFirstMigration.Entities
 {
     public class Section
     {
@@ -13,11 +15,9 @@
 
         public int ScheduleId { get; set; }
         public Schedule Schedule { get; set; }
-        public TimeSpan StartTime { get; set; }
-        public TimeSpan EndTime { get; set; }
 
+        public TimeSlot TimeSlot { get; set; }
         public ICollection<Student> Students { get; set; } = new List<Student>();
         
-
     }
 }
