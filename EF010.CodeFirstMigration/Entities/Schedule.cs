@@ -1,9 +1,12 @@
-﻿namespace EF010.CodeFirstMigration.Entities
+﻿using EF010.CodeFirstMigration.Entities.Enums;
+
+namespace EF010.CodeFirstMigration.Entities
 {
     public class Schedule
     {
         public int Id { get; set; }
-        public string? Title { get; set; }
+        //public string? Title { get; set; }
+        public ScheduleOptions Title { get; set; }
         public bool SUN { get; set; }
         public bool MON { get; set; }
         public bool TUE { get; set; }
